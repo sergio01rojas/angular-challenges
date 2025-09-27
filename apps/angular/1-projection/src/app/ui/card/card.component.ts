@@ -2,7 +2,6 @@ import { NgTemplateOutlet } from '@angular/common';
 import { Component, inject, input, output, TemplateRef } from '@angular/core';
 import { StudentStore } from '../../data-access/student.store';
 import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
 
 @Component({
   selector: 'app-card',
@@ -41,6 +40,4 @@ export class CardComponent {
   readonly itemTemplate = input.required<TemplateRef<unknown>>();
 
   readonly addItem = output<void>();
-
-  CardType = CardType;
 }
