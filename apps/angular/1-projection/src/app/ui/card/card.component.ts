@@ -1,7 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, inject, input, output, TemplateRef } from '@angular/core';
-import { StudentStore } from '../../data-access/student.store';
-import { TeacherStore } from '../../data-access/teacher.store';
+import { Component, input, output, TemplateRef } from '@angular/core';
 
 @Component({
   selector: 'app-card',
@@ -32,9 +30,6 @@ import { TeacherStore } from '../../data-access/teacher.store';
   imports: [NgTemplateOutlet],
 })
 export class CardComponent {
-  private readonly teacherStore = inject(TeacherStore);
-  private readonly studentStore = inject(StudentStore);
-
   readonly list = input<any[] | null>(null);
   readonly customClass = input('');
   readonly itemTemplate = input.required<TemplateRef<unknown>>();
