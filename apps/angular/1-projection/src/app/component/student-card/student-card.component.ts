@@ -11,7 +11,6 @@ import {
   randStudent,
 } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
-import { CardType } from '../../model/card.model';
 import { CardComponent } from '../../ui/card/card.component';
 import { MarkerTemplateDirective } from '../../ui/directive/my-template.directive';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
@@ -19,24 +18,27 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 @Component({
   selector: 'app-student-card',
   template: `
-    <ng-template markerTemplate let-item let-anyValue="sergio">
-      <app-list-item
-        [name]="item.firstName"
-        [id]="item.id"
-        (deletItem)="onDeleteItem($event)" />
-    </ng-template>
-
     <app-card
       [list]="students()"
-      customClass="bg-light-green"
+      class="bg-light-green"
       [itemTemplate]="markerTemplateDirective().templateRef"
       (addItem)="onAddItem()">
       <img ngSrc="assets/img/student.webp" width="200" height="200" />
+
+      <ng-template
+        markerTemplate
+        #markerTemplateSergio
+        let-item
+        let-anyValue="sergio">
+        <app-list-item
+          [name]="item.firstName"
+          (deletItem)="onDeleteItem(item.id)" />
+      </ng-template>
     </app-card>
   `,
   styles: [
     `
-      ::ng-deep .bg-light-green {
+      .bg-light-green {
         background-color: rgba(0, 250, 0, 0.1);
       }
     `,
@@ -56,7 +58,6 @@ export class StudentCardComponent implements OnInit {
   markerTemplateDirective = viewChild.required(MarkerTemplateDirective);
 
   students = this.store.students;
-  cardType = CardType.STUDENT;
 
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));

@@ -5,7 +5,6 @@ import {
   randTeacher,
 } from '../../data-access/fake-http.service';
 import { TeacherStore } from '../../data-access/teacher.store';
-import { CardType } from '../../model/card.model';
 import { CardComponent } from '../../ui/card/card.component';
 import { MarkerTemplateDirective } from '../../ui/directive/my-template.directive';
 import { ListItemComponent } from '../../ui/list-item/list-item.component';
@@ -13,24 +12,27 @@ import { ListItemComponent } from '../../ui/list-item/list-item.component';
 @Component({
   selector: 'app-teacher-card',
   template: `
-    <ng-template markerTemplate let-myItem let-otherValue="sergio">
-      <app-list-item
-        [name]="myItem.firstName"
-        [id]="myItem.id"
-        (deletItem)="onDeleteItem($event)" />
-    </ng-template>
-
     <app-card
       [list]="teachers()"
-      customClass="bg-light-red"
+      class="bg-light-red"
       [itemTemplate]="markerTemplateDirective().templateRef"
       (addItem)="onAddItem()">
       <img ngSrc="assets/img/teacher.png" width="200" height="200" />
+
+      <ng-template
+        markerTemplate
+        #markerTemplateSergio
+        let-myItem
+        let-otherValue="sergio">
+        <app-list-item
+          [name]="myItem.firstName"
+          (deletItem)="onDeleteItem(myItem.id)" />
+      </ng-template>
     </app-card>
   `,
   styles: [
     `
-      ::ng-deep .bg-light-red {
+      .bg-light-red {
         background-color: rgba(250, 0, 0, 0.1);
       }
     `,
@@ -49,7 +51,6 @@ export class TeacherCardComponent implements OnInit {
   markerTemplateDirective = viewChild.required(MarkerTemplateDirective);
 
   teachers = this.store.teachers;
-  cardType = CardType.TEACHER;
 
   ngOnInit(): void {
     this.http.fetchTeachers$.subscribe((t) => this.store.addAll(t));
