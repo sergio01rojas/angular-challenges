@@ -1,0 +1,10 @@
+<div class="loading">isLoading: {{ isloading() }}</div>
+
+<div class="todo-container">
+  @for (todo of todos(); track todo.id) {
+    <todoComponent
+      [todo]="todo"
+      (changed)="update($event)"
+      (deleted)="delete(todo)" />
+  }
+</div>

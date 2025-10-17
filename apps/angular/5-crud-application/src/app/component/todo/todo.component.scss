@@ -1,0 +1,34 @@
+.todo-card {
+    background-color: #f9faec;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 16px;
+    width: 300px;
+}
+
+
+.todo-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;  
+    text-overflow: ellipsis;
+}
+
+
+.todo-info {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 6px;
+}
+
+
+.todo-status {
+    font-weight: bold;
+    color: green;
+
+    &.incomplete {
+        color: red;
+    }
+}

@@ -1,0 +1,14 @@
+<div>
+    @let todoValue = todo();
+
+    <div class="todo-card">
+    <div class="todo-title">{{todoValue.title}}</div>
+    <div class="todo-info">{{todoValue.id}}</div>
+    <div class="todo-info">{{todoValue.userId}}</div>
+    <div class="todo-info todo-status" [class]="{'incomplete': !todoValue.completed }">{{todoValue.completed}}</div>
+    <div>
+        <button (click)="updateTodo()">Update</button>
+        <button (click)="deleteTodo()">Delete</button>
+    </div>
+    </div>
+</div>
