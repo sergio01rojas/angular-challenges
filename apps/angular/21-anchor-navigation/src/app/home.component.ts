@@ -5,14 +5,16 @@ import { NavButtonComponent } from './nav-button.component';
   imports: [NavButtonComponent],
   selector: 'app-home',
   template: `
-    <nav-button href="/foo" class="fixed left-1/2 top-3">Foo Page</nav-button>
+    <nav-button [href]="'/foo'" class="fixed left-1/2 top-3">Go Foo Page</nav-button>
+
     <div id="top" class="h-screen bg-gray-500">
-      Empty
-      <nav-button href="#bottom">Scroll Bottom</nav-button>
+      THIS IS HOME PAGE
+      <nav-button [fragment]="'bottom'">Scroll Bottom</nav-button>
     </div>
+
     <div id="bottom" class="h-screen bg-blue-300">
-      I want to scroll each
-      <nav-button href="#top">Scroll Top</nav-button>
+      I WANT TO SCROLL EACH
+      <nav-button [fragment]="'top'">Scroll Top</nav-button>
     </div>
   `,
 })
